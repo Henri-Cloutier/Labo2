@@ -1,10 +1,10 @@
 body {
-   background-color: rgb(189, 228, 255);
-   color: rgb(2, 59, 71);
+   background-color: white;
+   color: black;
 }
 
 hr {
-   border: 2px solid rgb(160, 205, 250);
+   border: 1px solid black;
    border-radius: 4px;
 }
 
@@ -18,4 +18,7 @@ hr {
    grid-template-columns: 80px 200px auto;
    row-gap: 20px;
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.boldtext{
+   font-weight: bold;
 }

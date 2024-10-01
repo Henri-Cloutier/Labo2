@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>About</title>
+    <title>KBG-APIMATHS Server</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/site.css" />
+    <link rel="icon" href="images/favicon.png">
 </head>
+
 <body>
-    <img src="images/about-icon.png" alt="" class="icon">
-    <h1>About page</h1>
+    <h2 style="margin-bottom: 1px;">GET : Maths endpoint</h2>
+    <h2 style="margin-top: 1px;">List of possible query strings:</h2>
     <hr>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = + & x = number & y = number</h3>
+        <h3 style="margin-top: 1px;">return {"op":"+", "x":number, "y":number, "value": x + y}</h3>
+    </div>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = - & x = number & y = number</h3>
+        <h3 style="margin-top: 1px;">return {"op":"-", "x":number, "y":number, "value": x - y}</h3>
+    </div>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = * & x = number & y = number</h3>
+        <h3 style="margin-top: 1px;">return {"op":"*", "x":number, "y":number, "value": x * y}</h3>
+    </div>
+    <div></div>
+        <h3 style="margin-bottom: 1px;">? op = / & x = number & y = number</h3>
+        <h3 style="margin-top: 1px;">return {"op":"/", "x":number, "y":number, "value": x / y}</h3>
+    </div>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = % & x = number & y = number</h3>
+        <h3 style="margin-top: 1px;">return {"op":"%", "x":number, "y":number, "value": x % y}</h3>
+    </div>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = ! & n = integer</h3>
+        <h3 style="margin-top: 1px;">return {"op":"%", "n":integer, "value": n!}</h3>
+    </div>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = p & n = integer</h3>
+        <h3 style="margin-top: 1px;">return {"op":"p", "n":integer, "value": true if n is a prime number}</h3>
+    </div>
+    <div>
+        <h3 style="margin-bottom: 1px;">? op = np & n = integer</h3>
+        <h3 style="margin-top: 1px;">return {"op":"n", "n":integer, "value": nth prime number}</h3>
+    </div>
+    <script>
+        console.log("index");
+    </script>
 </body>
+
 </html>
