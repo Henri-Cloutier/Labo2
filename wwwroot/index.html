@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -12,21 +12,78 @@
 
 <body>
     <h1>Test du service /api/maths</h1>
+
     <fieldset>
         <legend>Url du service</legend>
-        <input type="text" id="url" value="https://votre-serveur.glitch.me/api/maths" style="width: 15%;">
-        <button type="button">Démarrer le Test</button>
-        <button type="button">Aide</button>
+        <input type="text" id="url" value="https://votre-serveur.glitch.me/api/maths" style="width: 40%;">
+        <button type="button" id="startTest">Démarrer le Test</button>
+        <button type="button" id="help">Aide</button>
     </fieldset>
+
     <fieldset>
         <legend>Tests</legend>
+        <div id="testResults">
+
+        </div>
     </fieldset>
+
+
     <fieldset>
         <legend>Verdict</legend>
+        <div id="verdict"></div>
     </fieldset>
-    </div>
+
     <script>
-        console.log("index");
+        const tests = [
+            { "op": "+", "x": "3", "y": "2" },
+            { "op": "/", "x": "123", "y": "5" },
+            { "op": "*", "x": "10", "y": "abc" },
+            { "op": "!", "n": "5" }
+        ];
+
+        async function executeTest(url, test) {
+            let params = `?op=${encodeURIComponent(test.op)}`;
+            if (test.x) params += `&x=${encodeURIComponent(test.x)}`;
+            if (test.y) params += `&y=${encodeURIComponent(test.y)}`;
+            if (test.n) params += `&n=${encodeURIComponent(test.n)}`;
+
+            try {
+                const response = await fetch(url + params);
+                return await response.json();
+            } catch (error) {
+                return { error: 'Erreur lors de la requête' };
+            }
+        }
+
+        document.getElementById("startTest").addEventListener("click", async function () {
+            const url = document.getElementById("url").value;
+            let testResultsHTML = '';
+            let errorCount = 0;
+
+            for (let test of tests) {
+                const result = await executeTest(url, test);
+
+                if (result.error) {
+                    testResultsHTML += `ERROR --->{op: '${test.op}', x: '${test.x || ''}', y: '${test.y || ''}', n: '${test.n || ''}', error: '${result.error}'}<br>`;
+                    errorCount++;
+                } else {
+                    testResultsHTML += `OK --->{op: '${test.op}', x: '${test.x || ''}', y: '${test.y || ''}', n: '${test.n || ''}', value: '${result.value}'}<br>`;
+                }
+            }
+
+            document.getElementById("testResults").innerHTML = testResultsHTML;
+
+            if (errorCount === 0) {
+                document.getElementById("verdict").innerHTML = "Bravo aucun problème.";
+            } else {
+                document.getElementById("verdict").innerHTML = `Erreur, il y a ${errorCount} problème(s).`;
+            }
+        });
+
+        document.getElementById("help").addEventListener("click", function () {
+            alert("Utilisez cette interface pour tester les différentes opérations mathématiques de l'API.\n" +
+                "Les tests s'effectuent en cliquant sur 'Démarrer le Test'. Les résultats apparaîtront dans la section 'Tests'.");
+        });
     </script>
 </body>
 
